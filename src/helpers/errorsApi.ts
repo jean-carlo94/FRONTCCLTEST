@@ -4,16 +4,27 @@ export const validApiErrors = (error:unknown, arrayEnum: string[]) => {
     const errorsDef: string[] = [];
 
     if(error instanceof AxiosError){
-
+        
         if(error.response?.data?.errors){
             const apiErrors = error.response?.data?.errors as object;
             const errorsKeys = Object.keys(apiErrors);
-
+            
             for (const desEnum of arrayEnum) {
                 if(!errorsKeys.includes(desEnum)) continue;
                 errorsDef.push(desEnum);
             }
 
+        }
+
+        if(Array.isArray(error.response?.data) && error.response?.data.length > 0){
+            const apiErrors = error.response?.data;
+
+            for (const desEnum of arrayEnum) {
+                for (const errorString of apiErrors) {
+                    if(!errorString.includes(desEnum)) continue;
+                    errorsDef.push(desEnum)
+                }
+            }
         }
     }
     

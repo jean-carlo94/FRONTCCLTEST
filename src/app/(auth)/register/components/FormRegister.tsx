@@ -141,12 +141,26 @@ return (
                             </NextLink>
                         </div>
                     ) : (
-                        <label className="flex justify-end gap-2 mt-5">
-                            <span className="label-text-alt text-white">¿Ya tiene una cuenta?</span>
-                            <NextLink href={ RUTES_PAGES.LOGIN } passHref legacyBehavior>
-                                <a href="#" className="label-text-alt link link-hover text-white">Iniciar session</a>
-                            </NextLink>
-                        </label>
+                        <>
+                            <button 
+                                className="btn btn-secondary text-white hover:scale-110 w-full"
+                                type="submit"
+                            >
+                                {
+                                    isLoading ? (
+                                        <span className="loading loading-dots loading-lg"></span>
+                                    ) : (
+                                        "Registrar"
+                                    )
+                                }
+                            </button>
+                            <label className="flex justify-end gap-2 mt-5">
+                                <span className="label-text-alt text-white">¿Ya tiene una cuenta?</span>
+                                <NextLink href={ RUTES_PAGES.LOGIN } passHref legacyBehavior>
+                                    <a href="#" className="label-text-alt link link-hover text-white">Iniciar session</a>
+                                </NextLink>
+                            </label>
+                        </>
                     )
                 }
             </div>
